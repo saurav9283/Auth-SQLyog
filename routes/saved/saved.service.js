@@ -36,5 +36,28 @@ module.exports = {
                 });
             }
         });
+    },
+    GetSaveService: (id, callback) => {
+        const getSavedItemsQuery = process.env.GET_SAVED_ITEMS;
+        pool.query(getSavedItemsQuery, [id], (error, results) => {
+            if (error) {
+                console.log(error, "Error=====");
+                return callback(error);
+            }
+
+            return callback(null, results);
+        });
+    },
+    DeleteService: (id,itemId, callback) => {
+        console.log(id,itemId, "Saved data==============")
+        const deleteItemQuery = process.env.DELETE_ITEM;
+        pool.query(deleteItemQuery, [id, itemId], (error, results) => {
+            if (error) {
+                console.log(error, "Error=====");
+                return callback(error);
+            }
+
+            return callback(null, results);
+        });
     }
 }

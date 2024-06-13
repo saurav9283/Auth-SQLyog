@@ -8,7 +8,6 @@ module.exports = {
             if (err) {
                 return callback(err);
             }
-            // console.log(result.length,"result.length")
             if (result.length === 0) {
                 return callback(new Error("User not found"));
             }
@@ -21,7 +20,7 @@ module.exports = {
                 if (!isMatch) {
                     return callback(new Error("Password is incorrect"));
                 }
-                const token = jwt.sign({username: data.username}, 'saurav');
+                const token = jwt.sign({ username: data.username }, 'saurav');
                 return callback(null, { token, id: user.id });
             });
         });
