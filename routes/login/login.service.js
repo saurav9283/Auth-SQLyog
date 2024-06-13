@@ -1,5 +1,6 @@
 const pool = require('../../config/db.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     loginUser: (data, callback) => {
@@ -20,7 +21,8 @@ module.exports = {
                 if (!isMatch) {
                     return callback(new Error("Password is incorrect"));
                 }
-                return callback(null, user);
+                const token = jwt.sign({username: data.username}, 'saurav');
+                return callback(null, { token, id: user.id });
             });
         });
     }

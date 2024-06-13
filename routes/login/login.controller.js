@@ -1,6 +1,5 @@
 const axios = require('axios');
 const { loginUser } = require('./login.service.js');
-const jwt = require('jsonwebtoken');
 
 module.exports = {
     loginController: async (req, res) => {
@@ -12,8 +11,9 @@ module.exports = {
                     // console.log(err,"Error=====")
                     return res.status(400).json({message: err.message})
                 } 
-                const token = jwt.sign({username: data.username}, 'saurav');
-                res.status(200).json({message:'User logged in successfully',token : token})
+                const { token,id } = result;
+                console.log(result, "result=====")
+                res.status(200).json({message:'User logged in successfully',token : token, id: id})
             });
             
         } catch (error) {

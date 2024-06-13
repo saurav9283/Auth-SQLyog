@@ -14,6 +14,7 @@ module.exports = {
                     return res.status(500).json({ message: "Error=====", error: err })
                 }
                 data.password = hash;
+
                 insertUser(data, (err, results) => {
                     if (err) {
                         console.log(err, "Error=====")
